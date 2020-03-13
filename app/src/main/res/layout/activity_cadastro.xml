@@ -18,17 +18,17 @@
             <EditText android:hint="Nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/formulario_nome"/>
+                android:id="@+id/formName"/>
 
             <EditText android:hint="Endereço"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/formulario_endereco" />
+                android:id="@+id/formAddress" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Salvar"
-                android:id="@+id/formulario_salvar" />
+                android:id="@+id/formSave" />
 
 
         </LinearLayout>
