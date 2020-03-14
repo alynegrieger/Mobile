@@ -11,36 +11,43 @@ import android.widget.Toast;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    public static final String REGISTRO_SALVO = "Registro salvo!";
-    private EditText name;
-    private EditText address;
+    public static final int REGISTRO_SALVO = 1;
+    public static final int QUANTIDADE_NOTAS = 3;
+    private EditText nota1;
+    private EditText nota2;
+    private EditText nota3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        name = findViewById(R.id.formName);
-        address = findViewById(R.id.formAddress);
+        nota1 = findViewById(R.id.formNota1);
+        nota2 = findViewById(R.id.formNota2);
+        nota3 = findViewById(R.id.formNota3);
 
-        Button botaoSalvar = (Button) findViewById(R.id.formSave);
+        Button botaoSalvar = (Button) findViewById(R.id.formSend);
         botaoSalvar.setOnClickListener(new View.OnClickListener()  {
             @Override
             public void onClick (View v) {
-                String enderecoValue = address.getText().toString();
-                String nomeValue = name.getText().toString();
+                Float notaUmValue = Float.parseFloat(nota1.getText().toString());
+                Float notaDoisValue = Float.parseFloat(nota2.getText().toString());
+                Float notaTresValue = Float.parseFloat(nota3.getText().toString());
 
-                Intent intent = new Intent();
+                Float media = calculateMedia(notaUmValue, notaDoisValue, notaTresValue);
 
-                intent.putExtra("name", nomeValue);
-                intent.putExtra("address", enderecoValue );
 
-                setResult(MainActivity.CADATRADO_SUCESSO, intent);
+                Intent intentMostraMedia = new Intent (CadastroActivity.this, MediaActivity.class );
+                intentMostraMedia.putExtra("media", media);
+                startActivityForResult(intentMostraMedia, REGISTRO_SALVO);
 
-                Toast.makeText(CadastroActivity.this, REGISTRO_SALVO, Toast.LENGTH_SHORT).show();
-                finish();
+
             }
         });
 
+    }
+
+    private Float calculateMedia(Float notaUmValue, Float notaDoisValue, Float notaTresValue) {
+        return (notaUmValue + notaDoisValue + notaTresValue) / QUANTIDADE_NOTAS;
     }
 }
